@@ -9,6 +9,8 @@ $(document).ready(function () {
     var hidden_word = "";
     var inGame = false;
     var indxCharInHidden = 0;
+    var charsCounter = 0;
+    var charsRevealed = "";
 
     function keyPressed() {
         var char = event.key.toUpperCase();
@@ -20,7 +22,7 @@ $(document).ready(function () {
         indxCharInHidden = word.indexOf(char);
 
         if (indxCharInHidden != -1) {
-            hidden_word = revealChar(word, hidden_word, char, indxCharInHidden);
+            hidden_word = revealChar(word, hidden_word, char);
 
             console.log(char);
             $("#hidden_word").html(hidden_word);
@@ -30,17 +32,30 @@ $(document).ready(function () {
 
 
 
-        function revealChar(word, hidden_word, char, indxCharInHidden) {
+        function revealChar(word, hidden_word, char) {
             var tempStr = "";
             for (i = 0; i < word.length; i++) {
 
-                if (i === indxCharInHidden) {
-                    tempStr += char
+                // if (i === indxCharInHidden) {
+                //     tempStr += char
+                //     charsCounter += 1;
+                //     charsRevealed += char;
+                // }
+                // else { tempStr += hidden_word[i] }
+
+                if (char === word[i]) {
+                    console.log(char);
+                    console.log(word[i])
+                    charsCounter += 1;
+                    charsRevealed += char;
+                    tempStr += char;
+                    console.log("str " + charsRevealed);
+
                 }
                 else { tempStr += hidden_word[i] }
-
-
+                console.log("str " + tempStr);
             }
+            $("#guessed").text(charsRevealed);
             return tempStr;
         };
 
