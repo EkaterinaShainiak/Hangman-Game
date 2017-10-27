@@ -11,6 +11,7 @@ $(document).ready(function () {
     var indxCharInHidden = 0;
     var charsCounter = 0;
     var charsRevealed = "";
+    var guesses_remaining = 12;
 
     function keyPressed() {
         var char = event.key.toUpperCase();
@@ -22,8 +23,10 @@ $(document).ready(function () {
 
         if (charsRevealed.indexOf(char) == -1) {
             charsRevealed += char
+            guesses_remaining -= 1;
         };
         $("#guessed").text(charsRevealed);
+        $("#guesses_num").text(guesses_remaining);
          
         indxCharInHidden = word.indexOf(char);
         if (indxCharInHidden != -1) {
