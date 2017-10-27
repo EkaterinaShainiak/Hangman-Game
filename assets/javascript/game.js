@@ -47,13 +47,17 @@ $(document).ready(function () {
                     console.log(char);
                     console.log(word[i])
                     charsCounter += 1;
-                    charsRevealed += char;
-                    tempStr += char;
-                    console.log("str " + charsRevealed);
+                    if (charsRevealed.indexOf(char) != -1) {
+                        
+                    }
+                    else {
+                        charsRevealed += char;
+                        tempStr += char;
+                    }
+                    
 
                 }
                 else { tempStr += hidden_word[i] }
-                console.log("str " + tempStr);
             }
             $("#guessed").text(charsRevealed);
             return tempStr;
