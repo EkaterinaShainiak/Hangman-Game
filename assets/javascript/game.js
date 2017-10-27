@@ -19,21 +19,30 @@ $(document).ready(function () {
             initialize();
             inGame = true;
         }
-        indxCharInHidden = word.indexOf(char);
 
+        if (charsRevealed.indexOf(char) == -1) {
+            charsRevealed += char
+        };
+        $("#guessed").text(charsRevealed);
+         
+        indxCharInHidden = word.indexOf(char);
         if (indxCharInHidden != -1) {
             hidden_word = revealChar(word, hidden_word, char);
-
-            console.log(char);
             $("#hidden_word").html(hidden_word);
+            
         }
-        else { console.log("out") };
 
 
 
 
         function revealChar(word, hidden_word, char) {
             var tempStr = "";
+
+            if (charsRevealed.indexOf(char) == -1) {
+                charsRevealed += char
+            };
+            $("#guessed").text(charsRevealed);
+
             for (i = 0; i < word.length; i++) {
 
                 // if (i === indxCharInHidden) {
@@ -47,22 +56,17 @@ $(document).ready(function () {
                     console.log(char);
                     console.log(word[i])
                     charsCounter += 1;
-                    if (charsRevealed.indexOf(char) != -1) {
-                        
-                    }
-                    else {
-                        charsRevealed += char;
-                        tempStr += char;
-                    }
-                    
+                    tempStr += char;
 
                 }
-                else { tempStr += hidden_word[i] }
-            }
-            $("#guessed").text(charsRevealed);
+                else { tempStr += hidden_word[i] };
+
+
+
+
+            };
             return tempStr;
         };
-
         function isLetter(char) {
             return true
         }
@@ -83,6 +87,5 @@ $(document).ready(function () {
                 $("#hidden_word").html(hidden_word);
             }
         }
-
     }
 });
